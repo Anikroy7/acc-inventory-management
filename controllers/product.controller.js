@@ -10,6 +10,7 @@ const {
 exports.getProducts = async (req, res, next) => {
 
     try {
+        console.log(req.username, req.userID, 'inside get product');
 
         // filters
 
@@ -44,9 +45,9 @@ exports.getProducts = async (req, res, next) => {
         // pagination
 
         const { page = 1, limit = 2 } = req.query
-        console.log(page, limit, "form  quiry");
+        // console.log(page, limit, "form  quiry");
         const skip = (page - 1) * parseInt(limit)
-        console.log(skip, "skip");
+        // console.log(skip, "skip");
         queries.skip = skip
         queries.limit = parseInt(limit)
 

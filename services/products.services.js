@@ -2,7 +2,7 @@ const Product = require('../models/Product');
 
 
 exports.getProductServices = async (filters, queries) => {
-    console.log(filters, queries.limit);
+    // console.log(filters, queries.limit);
     const products = await Product
         .find(filters)
         .skip(queries.skip)
@@ -11,7 +11,7 @@ exports.getProductServices = async (filters, queries) => {
         .sort(queries.sortBy)
 
     const total = await Product.countDocuments(filters);
-    console.log(total);
+    // console.log(total);
     const page = Math.ceil(total / queries.limit)
     return { total, page, products };
 }
@@ -50,25 +50,18 @@ exports.bulkUpdateProductService = async (data) => {
     data.ids.forEach(product => {
         products.push(Product.updateOne({ _id: product.id }, product.data))
     });
-
-
     const result = Promise.all(products);
-
     return result;
 }
 
 exports.deleteProductServiceById = async (id) => {
-
     const result = await Product.deleteOne({ "_id": id });
-
     return result;
 
 }
 
 
 exports.bulkDeleteProductsService = async (ids) => {
-
     const result = await Product.deleteMany({ "_id": ids })
-
     return result;
 }

@@ -1,14 +1,16 @@
-const colors = require('colors');
 const mongoose = require("mongoose");
-const dotenv = require('dotenv').config();
-
 const app = require('./app');
+const colors = require('colors');
+require('dotenv').config()
 
 // database connetion
-
-mongoose.connect(process.env.DATABASE_LOCAL).then(() => {
-    console.log("Database connetion is successfull".bgGreen);
-});
+mongoose.connect(process.env.DATABASE_LOCAL)
+    .then(() => {
+        console.log("Database connetion is successfull".bgGreen);
+    })
+    .catch((err) => {
+        console.log("Database error", err);
+    })
 
 
 // server

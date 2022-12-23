@@ -1,6 +1,7 @@
 
 const express = require("express");
-const productController = require('../controllers/product.controller')
+const productController = require('../controllers/product.controller');
+const { checkLogin } = require("../middleware/checkLogin");
 
 const router = express.Router();
 
@@ -14,7 +15,7 @@ router.route('/bulk-delete')
 
 
 router.route('/')
-    .get(productController.getProducts)
+    .get(checkLogin, productController.getProducts)
     .post(productController.createProduct)
 
 
